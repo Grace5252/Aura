@@ -20,6 +20,10 @@ class AURA_API AAuraCharacter : public AAuraCharacterBase
 public:
 	AAuraCharacter();
 
+	void PossessedBy(AController* NewController) override;
+	void OnRep_PlayerState() override;
+	void InitAbilityActorInfo();
+
 private:
 	UPROPERTY(VisibleAnywhere)
 	UCameraComponent* ViewCamera;
