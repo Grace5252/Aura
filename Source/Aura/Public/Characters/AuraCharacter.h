@@ -22,7 +22,7 @@ public:
 
 	void PossessedBy(AController* NewController) override;
 	void OnRep_PlayerState() override;
-	void InitAbilityActorInfo();
+	virtual void InitAbilityActorInfo() override;
 
 private:
 	UPROPERTY(VisibleAnywhere)
