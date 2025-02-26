@@ -1,6 +1,7 @@
 // Copyright (c) Druid Mechanics, Grace Cappella
 
 #include "Characters/AuraCharacterBase.h"
+#include "AbilitySystem/AuraAbilitySystemComponent.h"
 #include "AbilitySystemComponent.h"
 
 AAuraCharacterBase::AAuraCharacterBase()
@@ -39,4 +40,12 @@ void AAuraCharacterBase::ApplyEffectToSelf(TSubclassOf<UGameplayEffect> Gameplay
 	EffectContext.AddSourceObject(this);
 	const FGameplayEffectSpecHandle EffectSpec = GetAbilitySystemComponent()->MakeOutgoingSpec(GameplayEffectClass, level, EffectContext);
 	GetAbilitySystemComponent()->ApplyGameplayEffectSpecToTarget(*EffectSpec.Data.Get(), GetAbilitySystemComponent());
+}
+
+void AAuraCharacterBase::AddCharacterAbiltiies()
+{
+	UAuraAbilitySystemComponent* AuraASC = CastChecked<UAuraAbilitySystemComponent>(AbilitySystemComponent);
+	if (!HasAuthority()) return;
+
+	AuraASC->AddCharacterAbilities(StartupAbilities);
 }
