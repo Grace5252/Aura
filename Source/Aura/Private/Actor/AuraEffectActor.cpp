@@ -1,7 +1,7 @@
 // Copyright (c) Druid Mechanics, Grace Cappella
 
 
-#include "ActorEffect/AuraEffectActor.h"
+#include "Actor/AuraEffectActor.h"
 #include "Templates/Tuple.h"
 #include "AbilitySystemComponent.h"
 #include "AbilitySystemBlueprintLibrary.h"
