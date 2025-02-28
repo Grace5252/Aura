@@ -35,6 +35,11 @@ private:
 
 	//Input Functions
 	void Move(const FInputActionValue& InputActionValue);
+	
+	bool bSpaceKeyDown = false;
+	void SpacePressed() { bSpaceKeyDown = true; };
+	void SpaceReleased() { bSpaceKeyDown = false; };
+	
 	void AbilityInputTagPressed(FGameplayTag InputTag);
 	void AbilityInputTagReleased(FGameplayTag InputTag);
 	void AbilityInputTagHeld(FGameplayTag InputTag);
@@ -61,6 +66,9 @@ private:
 
 	UPROPERTY(EditAnywhere, Category = "Input")
 	TObjectPtr<UInputAction> MoveAction;
+
+	UPROPERTY(EditAnywhere, Category = "Input")
+	TObjectPtr<UInputAction> SpaceAction;
 
 	//Click-to-Move Variables
 	FVector CachedDestination = FVector::ZeroVector;
