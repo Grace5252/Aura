@@ -36,7 +36,7 @@ void AAuraProjectile::BeginPlay()
 	SetLifeSpan(LifeSpan);
 	Sphere->OnComponentBeginOverlap.AddDynamic(this, &AAuraProjectile::OnSphereOverlap);
 
-	LoopingAudioComponent = UGameplayStatics::SpawnSoundAttached(LoopingSound, GetRootComponent());
+	UGameplayStatics::SpawnSoundAttached(LoopingSound, RootComponent, NAME_None, FVector::Zero(), FRotator::ZeroRotator, EAttachLocation::KeepRelativeOffset, true);
 }
 
 void AAuraProjectile::Destroyed()
@@ -44,18 +44,26 @@ void AAuraProjectile::Destroyed()
 	if (!bHit && !HasAuthority())
 	{
 		PlayImpactSoundAndEffect();
-		LoopingAudioComponent->Stop();
 	}
 	Super::Destroyed();
 }
 
 void AAuraProjectile::OnSphereOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
+	AActor* ThisOwner = GetOwner();
+	if (!IsValid(ThisOwner))
+	{
+		bHit = true;
+		Destroy();
+		return;
+	}
+	if (OtherActor == ThisOwner) return;
+
 	PlayImpactSoundAndEffect();
-	LoopingAudioComponent->Stop();
 
 	if (HasAuthority())
 	{
+		check(DamageEffectSpecHandle.Data);
 		if (UAbilitySystemComponent* TargetASC = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(OtherActor))
 		{
 			TargetASC->ApplyGameplayEffectSpecToSelf(*DamageEffectSpecHandle.Data.Get());
@@ -64,6 +72,8 @@ void AAuraProjectile::OnSphereOverlap(UPrimitiveComponent* OverlappedComponent, 
 	}
 	else
 	{
+		SetActorHiddenInGame(true);
+		Sphere->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 		bHit = true;
 	}
 }
