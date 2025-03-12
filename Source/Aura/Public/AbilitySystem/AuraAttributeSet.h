@@ -204,5 +204,6 @@ public:
 	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, MaxMana);
 
 private:
+	void ShowFloatingText(FEffectProperties& Props, const float LocalIncomingDamage, const bool bInCriticalHit, const bool bInBlockedHit);
 	void SetEffectProperties(const FGameplayEffectModCallbackData& Data, FEffectProperties& Props) const;
 };
