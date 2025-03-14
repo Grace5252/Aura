@@ -60,10 +60,14 @@ public:
 	FGameplayTag Damage_Arcane;
 	FGameplayTag Damage_Physical;
 
-	TMap<FGameplayTag, FGameplayTag> DamageTypesToResistances;
+	//Abilities Tags
+	FGameplayTag Abilities_Attack;
 
 	//Effects Tags
 	FGameplayTag Effects_HitReact;
+
+	TMap<FGameplayTag, FGameplayTag> DamageTypesToResistances;
+
 private:
 	static FAuraGameplayTags GameplayTags;
 };
