@@ -66,8 +66,12 @@ public:
 	//Effects Tags
 	FGameplayTag Effects_HitReact;
 
-	TMap<FGameplayTag, FGameplayTag> DamageTypesToResistances;
+	//Montage Tags
+	FGameplayTag Montage_Attack_Weapon;
+	FGameplayTag Montage_Attack_RightHand;
+	FGameplayTag Montage_Attack_LeftHand;
 
+	TMap<FGameplayTag, FGameplayTag> DamageTypesToResistances;
 private:
 	static FAuraGameplayTags GameplayTags;
 };
