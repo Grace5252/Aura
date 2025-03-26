@@ -10,6 +10,7 @@
 #include "AbilitySystem/AuraAbilitySystemLibrary.h"
 #include "Kismet/GameplayStatics.h"
 #include "NiagaraFunctionLibrary.h"
+#include "Engine/GameEngine.h"
 
 AAuraProjectile::AAuraProjectile()
 {
@@ -45,6 +46,7 @@ void AAuraProjectile::Destroyed()
 	if (!bHit && !HasAuthority())
 	{
 		PlayImpactSoundAndEffect();
+		bHit = true;
 	}
 	Super::Destroyed();
 }
