@@ -36,6 +36,8 @@ public:
 	virtual void Die() override;
 	virtual UNiagaraSystem* GetBloodEffect_Implementation() override;
 	virtual FTaggedMontage GetTaggedMontageByTag_Implementation(const FGameplayTag& MontageTag);
+	virtual int32 GetMinionCount_Implementation() override;
+	virtual void AddToMinionCount_Implementation(int32 Amount) override;
 
 	UFUNCTION(NetMulticast, Reliable)
 	virtual void MulticastHandleDeath();
@@ -67,6 +69,9 @@ protected:
 
 	UPROPERTY(EditAnywhere, Category = "Combat")
 	FName WeaponTipSocketName;
+
+	UPROPERTY(EditAnywhere, Category = "Combat")
+	FName TailSocketName;
 	
 	UPROPERTY(EditAnywhere, Category = "Combat")
 	FName LeftHandSocketName;
@@ -103,6 +108,9 @@ protected:
 	/*Death Sound*/
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Combat")
 	TObjectPtr<USoundBase> DeathSound;
+
+	/*Minions*/
+	int32 MinionCount = 0;
 private:
 	UPROPERTY(EditAnywhere, Category = "Abilities")
 	TArray<TSubclassOf<UGameplayAbility>> StartupAbilities;

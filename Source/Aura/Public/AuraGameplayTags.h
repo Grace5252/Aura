@@ -62,12 +62,14 @@ public:
 
 	//Abilities Tags
 	FGameplayTag Abilities_Attack;
+	FGameplayTag Abilities_Summon;
 
 	//Effects Tags
 	FGameplayTag Effects_HitReact;
 
 	//Socket Tags
 	FGameplayTag CombatSocket_Weapon;
+	FGameplayTag CombatSocket_Tail;
 	FGameplayTag CombatSocket_RightHand;
 	FGameplayTag CombatSocket_LeftHand;
 
