@@ -60,7 +60,7 @@ void UOverlayWidgetController::BindCallbacksToDependencies()
 		}
 		else
 		{
-			AuraASC->AbilitiesGiven.AddUObject(this, UOverlayWidgetController::OnIntializeStartupAbilities);
+			AuraASC->AbilitiesGiven.AddUObject(this, &UOverlayWidgetController::OnIntializeStartupAbilities);
 		}
 
 		AuraASC->EffectAssetTags.AddLambda(
@@ -82,7 +82,6 @@ void UOverlayWidgetController::BindCallbacksToDependencies()
 
 void UOverlayWidgetController::OnIntializeStartupAbilities(UAuraAbilitySystemComponent* AuraASC)
 {
-	//TODO: Get Info on all given abilities, look up their ability info, broadcast to widgets
 	if (!AuraASC->bStartupAbilitiesGiven) {
 		return;
 	}
@@ -91,9 +90,8 @@ void UOverlayWidgetController::OnIntializeStartupAbilities(UAuraAbilitySystemCom
 	BroadcastDelegate.BindLambda(
 		[this, AuraASC](const FGameplayAbilitySpec& AbilitySpec)
 		{
-			//TODO ability tag from ability spec
-			FAuraAbilityInfo Info = AbilityInfo->FindAbilityInfoForTag(UAuraAbilitySystemComponent::GetAbilityTagFromSpec(AbilitySpec));
-			Info.InputTag = UAuraAbilitySystemComponent::GetInputTagFromSpec(AbilitySpec);
+			FAuraAbilityInfo Info = AbilityInfo->FindAbilityInfoForTag(AuraASC->GetAbilityTagFromSpec(AbilitySpec));
+			Info.InputTag = AuraASC->GetInputTagFromSpec(AbilitySpec);
 			AbilityInfoDelegate.Broadcast(Info);
 		}
 	);
