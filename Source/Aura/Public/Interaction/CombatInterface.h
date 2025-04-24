@@ -9,6 +9,7 @@
 
 class UAnimMontage;
 class UNiagaraSystem; 
+enum class ECharacterClass : uint8;
 
 USTRUCT(BlueprintType)
 struct FTaggedMontage
@@ -72,4 +73,7 @@ public:
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void AddToMinionCount(int32 Amount);
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	ECharacterClass GetCharacterClass();
 };
