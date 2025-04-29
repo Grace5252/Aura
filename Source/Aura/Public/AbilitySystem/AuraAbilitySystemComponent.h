@@ -26,6 +26,11 @@ public:
 	FGameplayTag GetAbilityTagFromSpec(const FGameplayAbilitySpec& AbilitySpec);
 	FGameplayTag GetInputTagFromSpec(const FGameplayAbilitySpec& AbilitySpec);
 
+	void UpgradeAttribute(const FGameplayTag& AttributeTag);
+
+	UFUNCTION(Server, Reliable)
+	void ServerUpgradeAttribute(const FGameplayTag& AttributeTag);
+
 	bool bStartupAbilitiesGiven = false;
 	FEffectAssetTags EffectAssetTags;
 	FAbilitiesGiven AbilitiesGiven;

@@ -28,15 +28,22 @@ public:
 
 	FOnPlayerStatChanged OnXPChangedDelegate;
 	FOnPlayerStatChanged OnLevelChangedDelegate;
+	FOnPlayerStatChanged OnAttributePointsChangedDelegate;
+	FOnPlayerStatChanged OnSpellPointsChangedDelegate;
 
 	FORCEINLINE int32 GetPlayerLevel() const { return Level; }
 	FORCEINLINE int32 GetXP() const { return XP; }
+	FORCEINLINE int32 GetAttributePoints() const { return AttributePoints; }
+	FORCEINLINE int32 GetSpellPoints() const { return SpellPoints; }
 
 	void SetLevel(int32 NewLevel);
 	void AddToLevel(int32 AddedLevel);
 
 	void SetXP(int32 NewXP);
 	void AddToXP(int32 AddedXP);
+
+	void AddToAttributePoints(int32 AddedPoints);
+	void AddToSpellPoints(int32 AddedPoints);
 
 	UPROPERTY(EditDefaultsOnly)
 	TObjectPtr<ULevelUpInfo> LevelUpInfo;
@@ -53,6 +60,18 @@ private:
 
 	UPROPERTY(VisibleAnywhere, ReplicatedUsing = OnRep_XP)
 	int32 XP = 0;
+	
+	UPROPERTY(VisibleAnywhere, ReplicatedUsing = OnRep_AttributePoints)
+	int32 AttributePoints = 0;
+
+	UPROPERTY(VisibleAnywhere, ReplicatedUsing = OnRep_SpellPoints)
+	int32 SpellPoints = 0;
+
+	UFUNCTION()
+	void OnRep_AttributePoints(int32 OldPoints);
+	
+	UFUNCTION()
+	void OnRep_SpellPoints(int32 OldPoints);
 
 	UFUNCTION()
 	void OnRep_Level(int32 OldLevel);

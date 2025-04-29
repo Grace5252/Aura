@@ -60,6 +60,8 @@ public:
 
 	virtual void PostGameplayEffectExecute(const FGameplayEffectModCallbackData& Data) override;
 
+	virtual void PostAttributeChange(const FGameplayAttribute& Attribute, float OldValue, float NewValue) override;
+
 	/*
 	* Vital Rep_Notifies
 	*/
@@ -247,4 +249,7 @@ private:
 	void ShowFloatingText(FEffectProperties& Props, const float LocalIncomingDamage, const bool bInCriticalHit, const bool bInBlockedHit);
 	void SetEffectProperties(const FGameplayEffectModCallbackData& Data, FEffectProperties& Props) const;
 	void SendXPEvent(const FEffectProperties& Props);
+
+	bool bTopOffHealth = false;
+	bool bTopOffMana = false;
 };
