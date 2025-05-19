@@ -15,6 +15,7 @@ class UAuraAttributeSet;
 class UAbilityInfo;
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FAbilityInfoSignature, const FAuraAbilityInfo&, Info);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnPointsChangedSignature, int32, NewValue);
 
 USTRUCT(BlueprintType)
 struct FWidgetControllerParams
